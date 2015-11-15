@@ -3,9 +3,9 @@ Routes and views for the flask application.
 """
 from flask import Flask
 from flask_restful import Resource, Api
-# from datetime import datetime
-# from flask import render_template
-#from FlaskWebProject import app
+from datetime import datetime
+from flask import render_template
+from FlaskWebProject import app
 
 app = Flask(__name__)
 api = Api(app)
