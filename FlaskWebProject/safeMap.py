@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import simplejson, urllib
 
-#might need to import pandas into requirements.txt
+# might need to import pandas into requirements.txt
 
 
 UIorigin = "456 Landfair Ave, Los Angeles, CA"
