@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import simplejson, urllib
+import simplejson, urllib, urllib2, csv
 
 # might need to import pandas into requirements.txt
 
@@ -51,8 +51,9 @@ def readCSVfunc(crime):
 
 def calc_Crime_Index(coordPairs):
     score = 0
-    print "HELLO??????"
-    csv_file = pd.read_csv("/static/content/LAPD_Crime_and_Collision_Raw_Data_-_2014.csv")
+    with open(os.path.join(APP_STATIC, 'english_words.txt')) as f:
+        filecsv = f.read()
+    csv_file = pd.read_csv(filecsv)
     crime = readCSVfunc(csv_file)
     for lat, lng in crime["Location 1"]:
         for idx in range(len(coordPairs)-1):

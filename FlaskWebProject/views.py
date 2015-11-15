@@ -9,7 +9,12 @@ from FlaskWebProject import app
 from flask import Flask, url_for, json, request
 import safeMap as sm
 
-# app = Flask(__name__)
+import os
+import APP_STATIC
+
+# settings
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+APP_STATIC = os.path.join(APP_ROOT, 'static/content')
 
 @app.route('/addresses', methods = ['GET', 'POST'])
 def api_address():

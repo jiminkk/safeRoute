@@ -16,7 +16,7 @@ def api_address():
         print data
 
 
-        print sm.return_Best_Route(data['origin'], data['dest'])
+        print sm.return_Best_Route(data['Origin'], data['Destination'])
 
         return "cool"
 		# else:
