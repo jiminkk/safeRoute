@@ -54,6 +54,7 @@ def calc_Crime_Index(coordPairs):
     score = 0
     csv_file = pd.read_csv("FlaskWebProject/static/csv/crime_data.csv")
     return "SUP"
+    # csv_file=""
     p_crime = readCSVfunc(csv_file)
     for lat, lng in p_crime["Location 1"]:
         for idx in range(len(coordPairs)-1):

@@ -7,10 +7,10 @@ from flask import render_template
 from FlaskWebProject import app
 
 from flask import Flask, url_for, json, request
-from import_file import import_file
+# from import_file import import_file
 
-sm = import_file('../safeMap.py')
-# import safeMap as sm
+# sm = import_file('safeMap.py')
+import safeMap as sm
 
 # app = Flask(__name__)
 
@@ -20,12 +20,14 @@ def api_address():
         print "HELLO"
         # print request.mimetype
         print request.get_json()
+        print "YO"
         # if request.headers['Content-Type'] == 'application/json':
         # first_key = request.get_json()
         json_var = json.dumps(request.json)
         data = json.loads(json_var)
         print data
-
+        print sm.return_Best_Route(data['Origin'], data['Destination'])
+        print "YAY"
         return sm.return_Best_Route(data['Origin'], data['Destination'])
 
 @app.route('/')
