@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import simplejson, urllib, urllib2, csv
+from flask import jsonify
 
 # might need to import pandas into requirements.txt
 
@@ -79,7 +80,7 @@ def return_Best_Route(UIorigin, UIdestination):
             minimum = score
     # print "min_idx is", min_idx
     # The return type is a JSON object, with key="points", and val= THE POLYLINE DATA
-    return JSON_raw["routes"][min_idx]["overview_polyline"]
+    return jsonify(JSON_raw["routes"][min_idx]["overview_polyline"])
 
 
 

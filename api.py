@@ -13,12 +13,11 @@ def api_address():
 
 		json_var = json.dumps(request.json)
         data = json.loads(json_var)
-        print data
+        print data['Origin'], data['Destination']
 
-
-        print sm.return_Best_Route(data['Origin'], data['Destination'])
-
-        return "cool\n"
+        return sm.return_Best_Route(data['Origin'], data['Destination'])
+        # return "lols\n"
+        # return ret_json
 		# else:
 		# 	return "Unsupported Media Type!"
 
