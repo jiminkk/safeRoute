@@ -26,7 +26,7 @@ def api_address():
         json_var = json.dumps(request.json)
         data = json.loads(json_var)
         print data
-        print sm.return_Best_Route(data['Origin'], data['Destination'])
+        # print sm.return_Best_Route(data['Origin'], data['Destination'])
         print "YAY"
         return sm.return_Best_Route(data['Origin'], data['Destination'])
 

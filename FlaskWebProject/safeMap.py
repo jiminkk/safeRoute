@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import simplejson, urllib, urllib2, csv
+import simplejson, urllib, csv
 from flask import jsonify
 
 # might need to import pandas into requirements.txt
