@@ -23,8 +23,7 @@ def api_address():
         data = json.loads(json_var)
         print data
 
-        ret_json = sm.return_Best_Route(data['Origin'], data['Destination'])
-        return ret_json
+        return sm.return_Best_Route(data['Origin'], data['Destination'])
 
 @app.route('/')
 @app.route('/home')
