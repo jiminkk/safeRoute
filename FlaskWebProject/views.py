@@ -9,6 +9,7 @@ from FlaskWebProject import app
 from flask import Flask, url_for, json, request
 
 # app = Flask(__name__)
+json_var = {"sup": "yay"}
 
 @app.route('/addresses', methods = ['GET', 'POST'])
 def api_address():
@@ -17,7 +18,8 @@ def api_address():
         # print request.mimetype
         # print request.get_json()
         # if request.headers['Content-Type'] == 'application/json':
-        return json.dumps(request.json) + '\n'
+        # return json.dumps(request.json) + '\n'
+        return json_var
         # else:
         #   return "Unsupported Media Type!"
 
