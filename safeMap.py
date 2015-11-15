@@ -2,16 +2,19 @@ import pandas as pd
 import numpy as np
 import simplejson, urllib
 
+#might need to import pandas into requirements.txt
 
 
-rqstURL = "https://maps.googleapis.com/maps/api/directions/json?origin=eWestwood,CA&alternatives=true&destination=Hollywood,CA&key=AIzaSyCQ7a-qMPRtVz5mS4XOs2MgcB13JxQVvYk"
-testURL2 =
-# r = pd.read_json(rqstURL)
+UIorigin = "456 Landfair Ave, Los Angeles, CA"
+UIdestination = "1000 Tiverton Ave, Los Angeles, CA"
 
-r = simplejson.load(urllib.urlopen(rqstURL))
+test = "https://maps.googleapis.com/maps/api/directions/json?origin=456 Landfair Ave, Los Angeles, CA&alternatives=true&destination=1000 Tiverton Ave, Los Angeles, CA&key=AIzaSyCQ7a-qMPRtVz5mS4XOs2MgcB13JxQVvYk"
 
+def grabJson(UIorigin, UIdestination):
+    rqstURL = "https://maps.googleapis.com/maps/api/directions/json?origin="+UIorigin+"&alternatives=true&destination="+UIdestination+"&key=AIzaSyCQ7a-qMPRtVz5mS4XOs2MgcB13JxQVvYk"
+    return simplejson.load(urllib.urlopen(rqstURL))
+    # return simplejson.load(urllib.urlopen(test))
 
-coordPairs2 = np.array((200,200))
 
 '''
 def parseRoute(r):
@@ -25,9 +28,7 @@ def parseRoute(r):
 '''
 
 
-
-
-
+# This function returns the collection of coordinates for all of the routes
 def parseRoute(r):
     coordPairs = []
     for idx in range(len(r["routes"])):
@@ -39,12 +40,10 @@ def parseRoute(r):
         coordPairs.append(singlePair)
     return coordPairs
 
-test = parseRoute(r)
-
     # print "Starting location:", x["start_location"]["lat"], x["start_location"]["lng"]
     # print "Ending location:", x["end_location"]["lat"], x["end_location"]["lng"]
 
-crime = pd.read_csv("~/Documents/3rd year/HackSC/LAPD_Crime.csv")
+crime = pd.read_csv("FlaskWebProject/static/content/LAPD_Crime_and_Collision_Raw_Data_-_2014.csv")
 crime["Location 1"] = [x[1:-1] for x in crime["Location 1"]]
 crime["Location 1"] = [x.split(", ") for x in crime["Location 1"]]
 crime["Location 1"] = [np.array((float(x), float(y))) for x, y in crime["Location 1"]]
@@ -66,8 +65,23 @@ def calc_Crime_Index(coordPairs):
     return score
 
 
-print calc_Crime_Index(coordPairs = test[0])
-print calc_Crime_Index(coordPairs = test[1])
-print calc_Crime_Index(coordPairs = test[2])
+def return_Best_Route(UIorigin, UIdestination):
+    JSON_raw = grabJson(UIorigin, UIdestination)
+    routes = parseRoute(JSON_raw)
+    minimum = None
+    min_idx = -1
+    for idx, x in enumerate(routes):
+        score = calc_Crime_Index(x)
+        print score
+        if ((not minimum) or (score < minimum)):
+            min_idx = int(idx)
+            minimum = score
+    # print "min_idx is", min_idx
+
+
+    # The return type is a JSON object, with key="points", and val= THE POLYLINE DATA
+    return JSON_raw["routes"][min_idx]["overview_polyline"]
+
+
 
 

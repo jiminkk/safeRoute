@@ -7,21 +7,24 @@ from flask import render_template
 from FlaskWebProject import app
 
 from flask import Flask, url_for, json, request
+import safeMap as sm
 
 # app = Flask(__name__)
-json_var = {"sup": "yay"}
 
 @app.route('/addresses', methods = ['GET', 'POST'])
 def api_address():
     if request.method == 'POST':
         print "HELLO"
         # print request.mimetype
-        # print request.get_json()
+        print request.get_json()
         # if request.headers['Content-Type'] == 'application/json':
-        # return json.dumps(request.json) + '\n'
-        return json.dumps(json_var)
-        # else:
-        #   return "Unsupported Media Type!"
+        # first_key = request.get_json()
+        json_var = json.dumps(request.json)
+        data = json.loads(json_var)
+        print data
+
+        ret_json = sm.return_Best_Route(data['Origin'], data['Destination'])
+        return ret_json
 
 @app.route('/')
 @app.route('/home')
