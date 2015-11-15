@@ -52,7 +52,7 @@ def readCSVfunc(crime):
 
 def calc_Crime_Index(coordPairs):
     score = 0
-    csv_file = pd.read_csv("/crime_data.csv")
+    csv_file = pd.read_csv("static/content/crime_data.csv")
     p_crime = readCSVfunc(csv_file)
     for lat, lng in p_crime["Location 1"]:
         for idx in range(len(coordPairs)-1):
