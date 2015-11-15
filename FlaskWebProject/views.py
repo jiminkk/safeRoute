@@ -8,7 +8,7 @@ from FlaskWebProject import app
 
 from flask import Flask, url_for, json, request
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 @app.route('/addresses', methods = ['GET', 'POST'])
 def api_address():
