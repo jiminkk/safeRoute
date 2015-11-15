@@ -16,8 +16,11 @@ class MapTasks {
             return
         }
         let postsUrlRequest = NSMutableURLRequest(URL: postsURL)
+        //postsUrlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        postsUrlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        postsUrlRequest.addValue("utf-8", forHTTPHeaderField: "Accept-Charset")
         postsUrlRequest.HTTPMethod = "POST"
-        
+
         let newPost: NSDictionary = ["Origin": origin, "Destination": destination]
         do {
             let jsonPost = try NSJSONSerialization.dataWithJSONObject(newPost, options: [])
@@ -33,7 +36,7 @@ class MapTasks {
                     return
                 }
                 guard error == nil else {
-                    print("error calling GET on /posts/1")
+                    print("error calling GET")
                     print(error)
                     return
                 }
@@ -41,15 +44,20 @@ class MapTasks {
                 // parse the result as JSON, since that's what the API provides
                 let post: NSDictionary
                 do {
+
                     post = try NSJSONSerialization.JSONObjectWithData(responseData,
-                        options: []) as! NSDictionary
+                        options: [.AllowFragments]) as! NSDictionary
+                    //problem is here
+                    
+                    //let post = try NSJSONSerialization.JSONObjectWithData(responseData,
+                    //options:[]) as! [String:AnyObject]
                 } catch  {
-                    print("error parsing response from POST on /posts")
+                    print("Errror = \(error)")
+                    print("error parsing response from POST")
                     return
                 }
                 // now we have the post, let's just print it to prove we can access it
                 print("The post is: " + post.description)
-                
                 // the post object is a dictionary
                 // so we just access the title using the "title" key
                 // so check for a title and print it if we have one

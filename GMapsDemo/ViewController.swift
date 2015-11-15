@@ -29,7 +29,8 @@ class ViewController: UIViewController {
         //Http POST request to flask server
         //returns json containing lowest-crime-index route (plus metadata)
 
-        mapTasks.httpPost("http://jsonplaceholder.typicode.com/posts", origin: "Westwood", destination: "Hollywood");
+        //mapTasks.httpPost("http://jsonplaceholder.typicode.com/posts", origin: "Westwood", destination: "Hollywood");
+        mapTasks.httpPost("http://saferoute.azurewebsites.net/addresses", origin: "Westwood", destination: "Hollywood");
         
         //TODO: make mapTasks function return a JSON (or dictionary using below code) instead of printing
         //Parse response json to create route
@@ -37,13 +38,12 @@ class ViewController: UIViewController {
 
         
         //Map view
-        /*
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
-            longitude: 151.20, zoom: 6)
+        
+        let camera = GMSCameraPosition.cameraWithLatitude(34.0500,
+            longitude: -118.2500, zoom: 5)
         let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
         mapView.myLocationEnabled = true
         self.view = mapView
-        */
         
         //let marker = GMSMarker()
         //marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
@@ -66,7 +66,30 @@ class ViewController: UIViewController {
     
     
     @IBAction func findAddress(sender: AnyObject) {
-    
+       /* let addressAlert = UIAlertController(title: "Address Finder", message: "Destination:", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        addressAlert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Address?"
+        }
+        
+        let findAction = UIAlertAction(title: "Find Address", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            let address = (addressAlert.textFields![0] as UITextField).text! as String
+            
+            self.mapTasks.geocodeAddress(address, withCompletionHandler: { (status, success) -> Void in
+                
+            })
+            
+        }
+        
+        let closeAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+            
+        }
+        
+        addressAlert.addAction(findAction)
+        addressAlert.addAction(closeAction)
+        
+        presentViewController(addressAlert, animated: true, completion: nil)
+*/
     }
     
     
