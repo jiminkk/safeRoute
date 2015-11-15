@@ -18,7 +18,7 @@ def api_address():
 
         print sm.return_Best_Route(data['Origin'], data['Destination'])
 
-        return "cool"
+        return "cool\n"
 		# else:
 		# 	return "Unsupported Media Type!"
 

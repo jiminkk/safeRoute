@@ -51,7 +51,7 @@ def readCSVfunc(crime):
 
 def calc_Crime_Index(coordPairs):
     score = 0
-    csv_file = pd.read_csv("FlaskWebProject/uploads/crime_data.csv")
+    csv_file = pd.read_csv("FlaskWebProject/crime_data.csv")
     crime = readCSVfunc(csv_file)
     for lat, lng in crime["Location 1"]:
         for idx in range(len(coordPairs)-1):
