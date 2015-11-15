@@ -10,10 +10,10 @@ import Foundation
 
 class MapTasks {
     
-    func httpPost (postsEndpoint: String, origin: String, destination: String) {
+    func httpPost (postsEndpoint: String, origin: String, destination: String) -> String {
+        var result = "Did not get POST result"
         guard let postsURL = NSURL(string: postsEndpoint) else {
-            print("Error: cannot create URL")
-            return
+            return("Error: cannot create URL")
         }
         let postsUrlRequest = NSMutableURLRequest(URL: postsURL)
         //postsUrlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
@@ -57,7 +57,7 @@ class MapTasks {
                     return
                 }
                 // now we have the post, let's just print it to prove we can access it
-                print("The post is: " + post.description)
+                result = post.description
                 // the post object is a dictionary
                 // so we just access the title using the "title" key
                 // so check for a title and print it if we have one
@@ -68,6 +68,7 @@ class MapTasks {
         } catch {
             print("Error: cannot create JSON from post")
         }
+        return result;
     }
 }
 

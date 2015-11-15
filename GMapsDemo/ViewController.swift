@@ -11,31 +11,32 @@ import GoogleMaps
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var viewMap: UIView!
+    @IBOutlet weak var viewMap: GMSMapView!
     
     @IBOutlet weak var bbFindAddress: UIBarButtonItem!
     
     @IBOutlet weak var lblInfo: UILabel!
     
+    var routeString: String!
+    
+    var routePolyline: GMSPolyline!
+    
+    let mapTasks = MapTasks!()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let mapTasks = MapTasks();
         
-        //TODO: get origin and destination string from user, replace "Westwood", "Hollywood" with those (must be exact addr!)
+        //TODO: by calling createRoute, get origin and destination string from user, replace "Westwood", "Hollywood" with those (must be exact addr!)
         
         //Http POST request to flask server
         //returns json containing lowest-crime-index route (plus metadata)
 
         //mapTasks.httpPost("http://jsonplaceholder.typicode.com/posts", origin: "Westwood", destination: "Hollywood");
-        mapTasks.httpPost("http://saferoute.azurewebsites.net/addresses", origin: "Westwood", destination: "Hollywood");
-        
-        //TODO: make mapTasks function return a JSON (or dictionary using below code) instead of printing
-        //Parse response json to create route
-        //let dictionary: Dictionary<NSObject, AnyObject> = NSJSONSerialization.JSONObjectWithData(geocodingResultsData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as Dictionary<NSObject, AnyObject>
-
+        routeString = mapTasks.httpPost("http://saferoute.azurewebsites.net/addresses", origin: "Westwood", destination: "Hollywood");
+        //routeString = "ic}nErb~qUpBeCfGsGpAqBx@}@dByAz@iAHOPk@rBh@fATl@F|Hp@hD_AHG~DeDbFcE`BsAHE]aBc@_Cs@{EKa@uJwA"
+        print(routeString)
         
         //Map view
         
@@ -44,6 +45,9 @@ class ViewController: UIViewController {
         let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
         mapView.myLocationEnabled = true
         self.view = mapView
+        
+        //TODO: remove this, and instaed call createRoute
+        drawRoute()
         
         //let marker = GMSMarker()
         //marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
@@ -95,6 +99,12 @@ class ViewController: UIViewController {
     
     @IBAction func createRoute(sender: AnyObject) {
     
+    }
+    
+    func drawRoute() {
+        let path: GMSPath = GMSPath(fromEncodedPath: routeString) //exc_bad_instruction code=exc_1386
+        routePolyline = GMSPolyline(path: path)
+        routePolyline.map = viewMap
     }
     
     
