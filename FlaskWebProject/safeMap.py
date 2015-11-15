@@ -5,10 +5,10 @@ import simplejson, urllib, urllib2, csv
 # might need to import pandas into requirements.txt
 
 
-UIorigin = "456 Landfair Ave, Los Angeles, CA"
-UIdestination = "1000 Tiverton Ave, Los Angeles, CA"
+# UIorigin = "456 Landfair Ave, Los Angeles, CA"
+# UIdestination = "1000 Tiverton Ave, Los Angeles, CA"
 
-test = "https://maps.googleapis.com/maps/api/directions/json?origin=456 Landfair Ave, Los Angeles, CA&alternatives=true&destination=1000 Tiverton Ave, Los Angeles, CA&key=AIzaSyCQ7a-qMPRtVz5mS4XOs2MgcB13JxQVvYk"
+# test = "https://maps.googleapis.com/maps/api/directions/json?origin=456 Landfair Ave, Los Angeles, CA&alternatives=true&destination=1000 Tiverton Ave, Los Angeles, CA&key=AIzaSyCQ7a-qMPRtVz5mS4XOs2MgcB13JxQVvYk"
 
 def grabJson(UIorigin, UIdestination):
     rqstURL = "https://maps.googleapis.com/maps/api/directions/json?origin="+UIorigin+"&alternatives=true&destination="+UIdestination+"&key=AIzaSyCQ7a-qMPRtVz5mS4XOs2MgcB13JxQVvYk"
@@ -51,9 +51,7 @@ def readCSVfunc(crime):
 
 def calc_Crime_Index(coordPairs):
     score = 0
-    with open(os.path.join(APP_STATIC, 'english_words.txt')) as f:
-        filecsv = f.read()
-    csv_file = pd.read_csv(filecsv)
+    csv_file = pd.read_csv("../crime_data.csv")
     crime = readCSVfunc(csv_file)
     for lat, lng in crime["Location 1"]:
         for idx in range(len(coordPairs)-1):
@@ -80,8 +78,6 @@ def return_Best_Route(UIorigin, UIdestination):
             min_idx = int(idx)
             minimum = score
     # print "min_idx is", min_idx
-
-
     # The return type is a JSON object, with key="points", and val= THE POLYLINE DATA
     return JSON_raw["routes"][min_idx]["overview_polyline"]
 
