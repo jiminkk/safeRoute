@@ -7,9 +7,12 @@ from flask import render_template
 from FlaskWebProject import app
 
 from flask import Flask, url_for, json, request
-import safeMap as sm
+from import_file import import_file
 
-app = Flask(__name__)
+sm = import_file('../safeMap.py')
+# import safeMap as sm
+
+# app = Flask(__name__)
 
 @app.route('/addresses', methods = ['GET', 'POST'])
 def api_address():
