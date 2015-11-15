@@ -19,7 +19,7 @@ def api_address():
         # print request.get_json()
         # if request.headers['Content-Type'] == 'application/json':
         # return json.dumps(request.json) + '\n'
-        return json_var
+        return json.dumps(json_var)
         # else:
         #   return "Unsupported Media Type!"
 
