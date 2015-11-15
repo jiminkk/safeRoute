@@ -17,7 +17,7 @@ def api_address():
         # print request.mimetype
         # print request.get_json()
         # if request.headers['Content-Type'] == 'application/json':
-        return "JSON address: "  + json.dumps(request.json) + '\n'
+        return "YOOOOO JSON address: "  + json.dumps(request.json) + '\n'
         # else:
         #   return "Unsupported Media Type!"
 
