@@ -1,12 +1,22 @@
 """
 Routes and views for the flask application.
 """
-
+from flask import Flask
+from flask_restful import Resource, Api
 from datetime import datetime
 from flask import render_template
 from FlaskWebProject import app
 
+app = Flask(__name__)
+api = Api(app)
+api.add_resource(HelloWorld, '/')
+
 @app.route('/')
+class HelloWorld(Resource):
+    def get(self):
+        return {'hello': 'world'}
+
+
 @app.route('/home')
 def home():
     """Renders the home page."""
