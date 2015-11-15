@@ -43,7 +43,7 @@ def parseRoute(r):
     # print "Starting location:", x["start_location"]["lat"], x["start_location"]["lng"]
     # print "Ending location:", x["end_location"]["lat"], x["end_location"]["lng"]
 
-crime = pd.read_csv("FlaskWebProject/static/content/LAPD_Crime_and_Collision_Raw_Data_-_2014.csv")
+crime = pd.read_csv("static/content/LAPD_Crime_and_Collision_Raw_Data_-_2014.csv")
 crime["Location 1"] = [x[1:-1] for x in crime["Location 1"]]
 crime["Location 1"] = [x.split(", ") for x in crime["Location 1"]]
 crime["Location 1"] = [np.array((float(x), float(y))) for x, y in crime["Location 1"]]
